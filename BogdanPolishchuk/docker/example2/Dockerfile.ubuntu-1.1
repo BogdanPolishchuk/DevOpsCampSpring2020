@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+LABEL maintainer="test_1"
+RUN apt-get update && apt-get upgrade -y && \
+apt-get install -y openjdk-8-jdk maven git
+RUN mkdir git_proj
+WORKDIR /git_proj
+RUN git clone https://github.com/BogdanPolishchuk/gw_devops_app.git
+WORKDIR /git_proj/gw_devops_app
+RUN mvn clean install
+WORKDIR /git_proj/gw_devops_app/target
